@@ -1,21 +1,58 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import Image from "next/image";
+import styles from "./page.module.css";
+import { Box, Center, Code, Flex, Link } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+
+const RailzButton = dynamic(
+  () => import("./railz-button").then((mod) => mod.RailzButton),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
+    <Flex
+      as="main"
+      flexDir="column"
+      justifyContent="space-between"
+      alignItems="center"
+      minH="100vh"
+      p="6rem"
+    >
+      <Flex
+        flexDir={{ base: "column-reverse", md: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+        fontSize="0.85rem"
+        maxW="var(--max-width)"
+        w="full"
+        zIndex={2}
+        fontFamily="var(--font-mono)"
+        gap={6}
+      >
+        <Box
+          pos="relative"
+          margin={0}
+          padding="1rem"
+          backgroundColor="rgba(var(--callout-rgb), 0.5)"
+          border="1px solid rgba(var(--callout-border-rgb), 0.3)"
+          borderRadius="var(--border-radius)"
+        >
           Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+          <Code>app/page.tsx</Code>
+        </Box>
         <div>
-          <a
+          <Link
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap="0.5rem"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -24,20 +61,24 @@ export default function Home() {
               height={24}
               priority
             />
-          </a>
+          </Link>
         </div>
-      </div>
+      </Flex>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <Center>
+        <Flex flexDir="column" gap={6}>
+          <Image
+            className={styles.logo}
+            src="/next.svg"
+            alt="Next.js Logo"
+            width={180}
+            height={37}
+            priority
+          />
+
+          <RailzButton />
+        </Flex>
+      </Center>
 
       <div className={styles.grid}>
         <a
@@ -90,6 +131,6 @@ export default function Home() {
           </p>
         </a>
       </div>
-    </main>
-  )
+    </Flex>
+  );
 }
