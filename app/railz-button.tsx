@@ -10,7 +10,10 @@ export function RailzButton() {
   const onClick = () => {
     const widget = new RailzConnect();
 
-    widget.open({ parentElement: ref.current, widgetId: "<Your Widget Id>" });
+    widget.open({
+      parentElement: ref.current,
+      widgetId: process.env.NEXT_PUBLIC_RAILZ_WIDGET_ID,
+    });
   };
 
   return (
